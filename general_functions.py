@@ -6,15 +6,15 @@ def alarm():
     from tinkerforge.ip_connection import IPConnection
     from tinkerforge.bricklet_piezo_speaker_v2 import BrickletPiezoSpeakerV2
 
-    if __name__ == "__main__":
-        ipcon = IPConnection()
-        ps = BrickletPiezoSpeakerV2(UID, ipcon)
+    
+    ipcon = IPConnection()
+    ps = BrickletPiezoSpeakerV2(UID, ipcon)
 
-        ipcon.connect(HOST, PORT)
+    ipcon.connect(HOST, PORT)
 
-        ps.set_alarm(800, 2000, 10, 1, 0, 2000)
+    ps.set_alarm(800, 2000, 10, 1, 0, 2000)
 
-        ipcon.disconnect()
+    ipcon.disconnect()
  
 def sende_email(empfaenger, betreff, text):
     import smtplib
