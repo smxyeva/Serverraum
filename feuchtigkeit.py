@@ -1,1 +1,2 @@
-print("Hi")
+from general_functions import *
+
