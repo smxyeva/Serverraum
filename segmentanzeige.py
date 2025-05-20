@@ -91,6 +91,57 @@ def show_humidity():
 
     ipcon.disconnect()
 
+HOST = "172.20.10.242"
+PORT = 4223
+UID = "Vd8"
+
+index = 0
+order = [1, 2, 3]
+
+def cb_state_changed(button_l, button_r, led_l, led_r):
+    from tinkerforge.bricklet_dual_button_v2 import BrickletDualButtonV2
+
+    global index
+
+    if button_l == BrickletDualButtonV2.BUTTON_STATE_RELEASED:
+        index = (index - 1) % 3
+        if order[index] == 1:
+            show_temperature()
+        elif order[index] == 2:
+            show_illuminance()
+        elif order[index] == 3:
+            show_humidity()
+        print("Left Button gedrückt")
+
+    if button_r == BrickletDualButtonV2.BUTTON_STATE_RELEASED:
+        index = (index + 1) % 3
+        if order[index] == 1:
+            show_temperature()
+        elif order[index] == 2:
+            show_illuminance()
+        elif order[index] == 3:
+            show_humidity()
+        print("Right Button gedrückt")
+
+def buttons():
+    show_temperature()
+
+    from tinkerforge.ip_connection import IPConnection
+    from tinkerforge.bricklet_dual_button_v2 import BrickletDualButtonV2
+
+    ipcon = IPConnection()
+    db = BrickletDualButtonV2(UID, ipcon)
+
+    ipcon.connect(HOST, PORT)
+
+    db.register_callback(db.CALLBACK_STATE_CHANGED, cb_state_changed)
+    db.set_state_changed_callback_configuration(True)
+
+    print("Warte auf Tastendrücke... (zum Beenden Strg+C drücken)")
+    input()  # hält das Programm offen
+
+    ipcon.disconnect()
+
 
 
 def zerlege_zahl_in_ziffern(zahl: int) -> list:
@@ -101,4 +152,4 @@ def zerlege_zahl_in_ziffern(zahl: int) -> list:
 
 
 
-show_humidity()
+buttons()
