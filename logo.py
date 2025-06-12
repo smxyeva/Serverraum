@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
     # Download example image here:
     # https://raw.githubusercontent.com/Tinkerforge/e-paper-296x128-bricklet/master/software/examples/tf_red.png
-    image = Image.open('tf_red.png')
+    image = Image.open('OtterLogo_296x128.png')
 
     # Get black/white pixels from image and write them to the Bricklet buffer
     pixels_bw  = bool_list_from_pil_image(image, WIDTH, HEIGHT, (0xFF, 0xFF, 0xFF))
