@@ -1,6 +1,6 @@
 from general_functions import *
 from tinkerforge.ip_connection import IPConnection
-from tinkerforge.bricklet_humidity_v2 import BrickletmidityV2
+from tinkerforge.bricklet_humidity_v2 import BrickletHumidityV2
 
 HOST = "172.20.10.242"
 PORT = 4223
